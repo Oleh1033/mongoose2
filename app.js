@@ -4,19 +4,20 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 const cors = require("cors");
 
-var Schema = mongoose.Schema;
-
-var BookSchema = new Schema({
-    title: String,
-    author: String,
-    category: String
-});
+var port = 8080;
+const db = require("./config.js")
+var Book = require('./Book.model');
+var Table = require('./Table.model');
 
 
+//db = "mongodb+srv://kud:kud@clusterkudos-m11u8.azure.mongodb.net/test?retryWrites=true";
+// { useNewUrlParser: true };
 
-var Book = mongoose.model('Book', BookSchema);
-
-db = "mongodb+srv://kud:kud@clusterkudos-m11u8.azure.mongodb.net/test?retryWrites=true";
+mongoose.connect(db, { dbName: "Mongoose" })
+  .then( () => {
+    console.log('Connection to the Atlas Cluster is successful!')
+  })
+  .catch( (err) => console.error(err));
 
 app.use(
     cors({
@@ -30,9 +31,9 @@ app.use(
 
 
 
-var port = 8080;
 
-mongoose.connect(db, { useNewUrlParser: true });
+
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -73,7 +74,7 @@ app.get('/books/:id', function (req, res) {
 
 app.post('/book', function (req, res) {
 
-      var newBook = new Book();
+      var newBook = new Table();
 
       newBook.title = req.body.title;
       newBook.author = req.body.author;
