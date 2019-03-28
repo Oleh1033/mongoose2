@@ -7,4 +7,4 @@ var BookSchema = new Schema({
   category: String
 });
 
-module.exports = mongoose.model('aaaaaa', BookSchema);
+module.exports = mongoose.model('Table', BookSchema);

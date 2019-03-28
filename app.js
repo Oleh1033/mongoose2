@@ -10,8 +10,6 @@ var Book = require('./Book.model');
 var Table = require('./Table.model');
 
 
-//db = "mongodb+srv://kud:kud@clusterkudos-m11u8.azure.mongodb.net/test?retryWrites=true";
-// { useNewUrlParser: true };
 
 mongoose.connect(db, { dbName: "Mongoose" })
   .then( () => {
@@ -28,11 +26,6 @@ app.use(
         preflightContinue: false
     })
 );
-
-
-
-
-
 
 
 app.use(bodyParser.json())
@@ -74,7 +67,7 @@ app.get('/books/:id', function (req, res) {
 
 app.post('/book', function (req, res) {
 
-      var newBook = new Table();
+      var newBook = new Book();
 
       newBook.title = req.body.title;
       newBook.author = req.body.author;
